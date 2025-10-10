@@ -1,0 +1,29 @@
+<footer class="site-footer">
+  <div class="container">
+    <p>&copy; <%= new Date().getFullYear() %> DailyShop. All rights reserved to BONTHA NIKHIL.</p>
+  </div>
+</footer>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const userMenu = document.getElementById('userMenu');
+    const toggle = document.getElementById('accountToggle');
+
+    toggle.addEventListener('click', event => {
+      event.preventDefault(); // Prevent default anchor behavior
+      userMenu.classList.toggle('open'); // Toggle dropdown visibility
+    });
+
+    // Close dropdown on clicking outside
+    document.addEventListener('click', event => {
+      if (!userMenu.contains(event.target)) {
+        userMenu.classList.remove('open');
+      }
+    });
+
+    // Prevent dropdown close when clicking inside dropdown
+    userMenu.querySelector('.dropdown').addEventListener('click', event => {
+      event.stopPropagation();
+    });
+  });
+</script>

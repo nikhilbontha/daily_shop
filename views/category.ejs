@@ -1,0 +1,22 @@
+<%- include('../layout/header') %>
+<h1><%= categoryName.charAt(0).toUpperCase() + categoryName.slice(1).replace(/_/g, ' ') %> Products</h1>
+<link rel="stylesheet" href="/css/style.css" />
+<div class="products-grid">
+  <% if (products.length === 0) { %>
+    <p>No products available in this category.</p>
+  <% } else { %>
+    <% products.forEach(product => { %>
+      <div class="product-card">
+  <img src="<%= (product.images && product.images[0]) ? product.images[0] : '/images/default.jpg' %>" alt="<%= product.name %>" />
+        <h3><%= product.name %></h3>
+        <p>₹<%= product.price %></p>
+        <p><%= product.description %></p>
+        <form action="/cart/add" method="POST">
+          <input type="hidden" name="productId" value="<%= product._id %>" />
+          <button type="submit">Add to Cart</button>
+        </form>
+      </div>
+    <% }) %>
+  <% } %>
+</div>
+

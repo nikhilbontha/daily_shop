@@ -1,0 +1,13 @@
+  <%- include('layout/header') %>
+<h1>Checkout</h1>
+<link rel="stylesheet" href="/css/style.css" />
+<p>Total Price: ₹<%= totalPrice %></p>
+<form action="/api/payment/create-order" method="POST" class="checkout-form">
+  <div class="payment-options">
+    <label><input type="radio" name="paymentMethod" value="card" required /> Card</label>
+    <label><input type="radio" name="paymentMethod" value="upi" required /> UPI</label>
+    <label><input type="radio" name="paymentMethod" value="cash" required /> Cash</label>
+  </div>
+  <button type="submit" class="btn btn-primary" style="margin-top:20px;">Pay Now</button>
+</form>
+ 

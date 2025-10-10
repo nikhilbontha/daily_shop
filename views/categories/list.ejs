@@ -1,0 +1,31 @@
+<%- include('../layout/header') %>
+<link rel="stylesheet" href="/css/modern.css" />
+
+<main class="category-container">
+  <h1><%= categoryName.charAt(0).toUpperCase() + categoryName.slice(1) %></h1>
+  <% if (products && products.length > 0) { %>
+    <div class="product-grid">
+      <% products.forEach(product => { %>
+        <div class="product-card">
+          <img src="<%= (product.images && product.images[0]) ? product.images[0] : '/images/default.jpg' %>" alt="<%= product.name %>" />
+          <div class="product-body">
+            <h2 class="product-title"><%= product.name %></h2>
+            <p class="product-desc"><%= product.description %></p>
+            <p class="product-price">₹<%= product.price %></p>
+
+            <form action="/cart/add" method="POST" class="product-action">
+              <input type="hidden" name="productId" value="<%= product._id %>" />
+              <button type="submit" class="btn btn-primary">Add to Cart</button>
+            </form>
+          </div>
+        </div>
+      <% }) %>
+    </div>
+  <% } else { %>
+    <div class="empty-state">
+      <img src="/images/empty-box.png" alt="No products" class="empty-illustration" />
+      <h2 class="empty-title">No products found in this category</h2>
+      <p class="empty-sub">Please check back later or explore other categories.</p>
+    </div>
+  <% } %>
+</main>

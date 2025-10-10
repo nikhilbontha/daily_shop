@@ -1,0 +1,23 @@
+<%- include('layout/header') %>
+<link rel="stylesheet" href="/css/style.css" />w
+<main class="container">
+  <h1>Search Results for "<%= query %>"</h1>
+  <div class="products-grid">
+    <% if (products.length === 0) { %>
+      <p>No products found.</p>
+    <% } else { %>
+      <% products.forEach(product => { %>
+        <div class="product-card">
+          <h3><%= product.name %></h3>
+          <p>₹<%= product.price %></p>
+          <p><%= product.description %></p>
+          <form action="/cart/add" method="POST">
+            <input type="hidden" name="productId" value="<%= product._id %>" />
+            <button type="submit">Add to Cart</button>
+          </form>
+        </div>
+      <% }) %>
+    <% } %>
+  </div>
+</main>
+<%- include('layout/footer') %>

@@ -1,0 +1,34 @@
+<%- include('layout/header') %>
+
+
+<main class="returns-main" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:60vh;background:#f6f7f9;">
+  <h1 style="margin-top:40px;font-size:2.2rem;color:#222;font-weight:600;">Returns & Cancel</h1>
+  <form action="/returns" method="POST" class="returns-form" style="background:#fff;padding:32px 28px;border-radius:12px;box-shadow:0 2px 16px rgba(0,0,0,0.07);width:100%;max-width:420px;margin:32px 0;">
+    <div style="margin-bottom:18px;">
+      <label for="itemId" style="display:block;font-weight:500;margin-bottom:6px;">Select Item:</label>
+      <select id="itemId" name="itemId" required style="width:100%;padding:8px 10px;border-radius:6px;border:1px solid #ccc;">
+        <option value="">-- Select an item --</option>
+        <% if (items && items.length) { items.forEach(function(item) { %>
+          <option value="<%= item.id %>"><%= item.name %> (<%= item.id %>)</option>
+        <% }) } %>
+      </select>
+    </div>
+    <div style="margin-bottom:18px;">
+      <label for="reason" style="display:block;font-weight:500;margin-bottom:6px;">Reason for Return/Cancel:</label>
+      <textarea id="reason" name="reason" rows="3" required style="width:100%;padding:8px 10px;border-radius:6px;border:1px solid #ccc;"></textarea>
+    </div>
+    <div style="margin-bottom:18px;">
+      <label for="actionType" style="display:block;font-weight:500;margin-bottom:6px;">Action:</label>
+      <select id="actionType" name="actionType" required style="width:100%;padding:8px 10px;border-radius:6px;border:1px solid #ccc;">
+        <option value="return">Return</option>
+        <option value="cancel">Cancel</option>
+      </select>
+    </div>
+    <div style="margin-bottom:18px;">
+      <label for="additional" style="display:block;font-weight:500;margin-bottom:6px;">Additional Comments:</label>
+      <textarea id="additional" name="additional" rows="2" style="width:100%;padding:8px 10px;border-radius:6px;border:1px solid #ccc;"></textarea>
+    </div>
+    <button type="submit" style="width:100%;background:#219150;color:#fff;font-weight:600;padding:10px 0;border:none;border-radius:6px;font-size:1.1rem;cursor:pointer;transition:background 0.2s;">Submit Request</button>
+  </form>
+</main>
+<%- include('layout/footer') %>

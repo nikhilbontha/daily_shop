@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Register - DailyShop</title>
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+  <%- include('../layout/header') %>
+
+  <main class="container">
+    <h1>Register</h1>
+
+    <% if (error) { %>
+      <p class="error-message"><%= error %></p>
+    <% } %>
+
+    <form action="/auth/register" method="POST">
+  <!-- Name, Email, Password Fields as before -->
+    <label>Name</label>
+    <input type="text" name="name" required />
+    <label>Email</label>
+    <input type="email" name="email" required />
+    <label>Password</label>
+    <input type="password" name="password" required />
+    
+  <label>Phone Number</label>
+  <input type="text" name="phone" required />
+
+  <label>City</label>
+  <input type="text" name="city" required />
+
+  <label>Pincode</label>
+  <input type="text" name="pincode" required />
+
+  <label>Nearby Landmark</label>
+  <input type="text" name="nearby" />
+
+  <label>State</label>
+  <input type="text" name="state" required />
+
+  <label>Country</label>
+  <input type="text" name="country" value="India" required />
+
+  <button type="submit">Register</button>
+</form>
+
+    </form>
+  </main>
+
+  <%- include('../layout/footer') %>
+</body>
+</html>

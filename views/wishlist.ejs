@@ -1,0 +1,33 @@
+<%- include('layout/header') %>
+  <link rel="stylesheet" href="/css/wishlist.css" />
+<main class="wishlist-main animate-fadeIn">
+  <h1 class="wishlist-title">My Wishlist</h1>
+  <% if (wishlist.length === 0) { %>
+    <div class="wishlist-empty">Your wishlist is empty.</div>
+  <% } else { %>
+    <ul class="wishlist-list">
+      <% wishlist.forEach(function(item) { %>
+        <li class="wishlist-card">
+          <div class="wishlist-left">
+            <img class="wishlist-thumb" src="<%= item.images && item.images.length ? item.images[0] : '/images/default.jpg' %>" alt="<%= item.name %>" />
+            <div>
+              <div class="wishlist-name"><a href="/products/<%= item._id %>"><%= item.name %></a></div>
+              <div class="wishlist-price">₹<%= item.price %></div>
+            </div>
+          </div>
+          <div class="wishlist-actions">
+            <form action="/cart/add" method="POST" style="display:inline">
+              <input type="hidden" name="productId" value="<%= item._id %>" />
+              <button class="btn-wishlist-add">Add to Cart</button>
+            </form>
+            <form action="/wishlist/remove" method="POST" style="display:inline">
+              <input type="hidden" name="productId" value="<%= item._id %>" />
+              <button class="btn-wishlist-remove">Remove</button>
+            </form>
+          </div>
+        </li>
+      <% }) %>
+    </ul>
+  <% } %>
+</main>
+<%- include('layout/footer') %>

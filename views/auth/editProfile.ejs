@@ -1,0 +1,92 @@
+  <%- include('../layout/header') %>
+<main class="container">
+  <h1>Edit Profile</h1>
+  <form action="/profile/edit" method="POST" class="edit-profile-form" enctype="multipart/form-data">
+    <div>
+      <label for="city">City:</label>
+      <input type="text" id="city" name="city" value="<%= user.address && user.address.city ? user.address.city : '' %>" />
+    </div>
+    <div>
+      <label for="state">State:</label>
+      <input type="text" id="state" name="state" value="<%= user.address && user.address.state ? user.address.state : '' %>" />
+    </div>
+    <div>
+      <label for="country">Country:</label>
+      <input type="text" id="country" name="country" value="<%= user.address && user.address.country ? user.address.country : '' %>" />
+    </div>
+    <div>
+      <label for="avatar">Profile Photo:</label>
+      <input type="file" id="avatar" name="avatar" accept="image/*" />
+      <% if (user.avatarUrl) { %>
+        <img src="<%= user.avatarUrl %>" alt="Profile Photo" style="max-width:80px; border-radius:50%; margin-top:10px;" />
+      <% } %>
+    </div>
+    <div>
+      <label for="name">Name:</label>
+      <input type="text" id="name" name="name" value="<%= user.name %>" required />
+    </div>
+    <div>
+      <label for="surname">Surname:</label>
+      <input type="text" id="surname" name="surname" value="<%= user.surname || '' %>" />
+    </div>
+    <div>
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" value="<%= user.email %>" required />
+    </div>
+    <div>
+      <label for="pincode">Pincode:</label>
+      <input type="text" id="pincode" name="pincode" value="<%= user.address && user.address.pincode ? user.address.pincode : '' %>" />
+    </div>
+    <div>
+      <label for="dateOfBirth">Date of Birth:</label>
+      <input type="date" id="dateOfBirth" name="dateOfBirth" value="<%= user.dateOfBirth ? user.dateOfBirth.toISOString().substring(0, 10) : '' %>" />
+    </div>
+    <div>
+      <label for="gender">Gender:</label>
+      <select id="gender" name="gender">
+        <option value="">Select</option>
+        <option value="Male" <%= user.gender === 'Male' ? 'selected' : '' %>>Male</option>
+        <option value="Female" <%= user.gender === 'Female' ? 'selected' : '' %>>Female</option>
+        <option value="Other" <%= user.gender === 'Other' ? 'selected' : '' %>>Other</option>
+      </select>
+    </div>
+    <button type="submit">Save Changes</button>
+  </form>
+</main>
+<%- include('../layout/footer') %>
+<style>
+.edit-profile-form {
+  max-width: 400px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+.edit-profile-form div {
+  margin-bottom: 1rem;
+}
+.edit-profile-form label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: bold;
+}
+.edit-profile-form input {
+  width: 100%;
+  padding: 0.5rem;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+.edit-profile-form button {
+  background: #1976d2;
+  color: #fff;
+  border: none;
+  padding: 0.7rem 1.5rem;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+.edit-profile-form button:hover {
+  background: #1565c0;
+}
+</style>
