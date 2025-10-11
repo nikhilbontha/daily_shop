@@ -1,7 +1,7 @@
 .site-header-amazon {
   background-color: #2b9438;
   color: #fff;
-  padding: 18px 36px;
+  padding: 8px 12px; /* slimmer header */
   font-family: Arial, sans-serif;
 }
 
@@ -9,7 +9,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 22px;
+  gap: 12px; /* tightened */
   width: 100%;
 }
 
@@ -19,11 +19,11 @@
 }
 
 .header-left {
-  gap: 12px;
+  gap: 8px;
   flex: 0 0 auto;
 }
 
-.brand-logo { height: 88px; }
+.brand-logo { height: 56px; } /* smaller logo height */
 
 .header-center {
   justify-content: center;
@@ -41,26 +41,27 @@
 .search-bar {
   display: flex;
   align-items: center;
-  gap: 8px;
-  max-width: 520px;
-  width: 40%;
+  gap: 6px;
+  max-width: 380px;
+  width: 30%;
 }
 .search-bar input[type="search"] {
   flex: 1 1 auto;
-  padding: 6px 10px;
+  padding: 6px 8px;
   border-radius: 4px;
   border: none;
+  font-size: 0.95rem;
 }
 .search-bar button {
   background: #e3eefc;
   border: none;
-  padding: 6px 8px;
+  padding: 5px 6px;
   border-radius: 6px;
 }
 
 .site-name {
-  font-size: 2.1rem;
-  font-weight: bold;
+  font-size: 1.5rem;
+  font-weight: 700;
   color: #27548f;
   text-decoration: none;
   user-select: none;
@@ -96,11 +97,11 @@
 }
 
 .user-avatar {
-  width: 75px;
-  height: 75px;
-  border-radius: 100%;
+  width: 92px; /* larger profile avatar */
+  height: 92px;
+  border-radius: 50%;
   object-fit: cover;
-  border: 1px solid #0f0f0f;
+  border: 2px solid #ffffffaa;
   background: #fff;
 }
 
@@ -137,13 +138,15 @@
   .header-center { order: 2; }
   .header-left { order: 1; }
   .header-right { order: 3; justify-content: space-between; }
+  /* keep avatar smaller on mobile */
+  .user-avatar { width: 48px !important; height: 48px !important; }
 }
 
 
 .header-right {
   display: flex;
   align-items: center;
-  gap: 30px; /* Larger gap for visual separation */
+  gap: 18px; /* moderate gap for visual separation */
 }
 
 /* Avatar + greeting */
@@ -157,13 +160,13 @@
 }
 
 .user-avatar {
-  width: 75px;
-  height: 75px;
+  width: 92px;
+  height: 92px;
   border-radius: 50%;
   object-fit: cover;
   background: #0c0c0c;
   border: 2px solid #131313;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+  box-shadow: 0 4px 14px rgba(0,0,0,0.12);
 }
 
 .account-menu {
@@ -190,10 +193,10 @@
   color: #1976d2;
   background: #e3eefc;
   text-decoration: none;
-  padding: 8px 15px;
-  border-radius: 18px;
+  padding: 6px 10px;
+  border-radius: 14px;
   font-weight: 500;
-  font-size: 1rem;
+  font-size: 0.95rem;
   transition: background 0.15s, color 0.15s;
   box-shadow: 0 1px 4px rgba(50,110,255,0.08);
 }
@@ -319,4 +322,52 @@
     flex-wrap: wrap;
     gap: 8px;
   }
+}
+
+.site-header-amazon .header-controls {
+/* Header controls: home and back buttons */
+  display: inline-flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.site-header-amazon .btn-back, .site-header-amazon .btn-home {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #ffffffcc;
+  color: #0b4f2a;
+  border: none;
+  padding: 8px 10px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.site-header-amazon .btn-back:hover, .site-header-amazon .btn-home:hover {
+  background: #e6f6ea;
+  color: #0b6b39;
+}
+
+.site-header-amazon .btn-home {
+  display: inline-flex;
+}
+
+/* Small helper for screen-reader-only text */
+.sr-only {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+@media (max-width: 700px) {
+  .site-header-amazon .header-controls { order: 1; }
+  .site-header-amazon .btn-back, .site-header-amazon .btn-home { padding: 8px; font-size: 0.95rem; }
 }

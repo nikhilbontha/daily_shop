@@ -7,7 +7,16 @@ const userSchema = new mongoose.Schema({
   password: String,
   avatarUrl: String,
   phone: String,
-  dateOfBirth: Date,
+  dateOfBirth: {
+    type: Date,
+    set: function (val) {
+      if (val == null || val === '') return undefined;
+      if (val instanceof Date) return val;
+      // Try to parse strings/numbers
+      const d = new Date(val);
+      return isNaN(d.getTime()) ? undefined : d;
+    }
+  },
   gender: { type: String, enum: ['Male', 'Female', 'Other'] },
   address: {
     city: String,
@@ -23,6 +32,10 @@ const userSchema = new mongoose.Schema({
       quantity: { type: Number, default: 1 }
     }
   ]
+  ,
+  // Password reset fields
+  resetPasswordToken: String,
+  resetPasswordExpires: Date
 });
 
 module.exports = mongoose.models.User || mongoose.model('User', userSchema);

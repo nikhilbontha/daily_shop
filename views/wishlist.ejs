@@ -2,8 +2,15 @@
   <link rel="stylesheet" href="/css/wishlist.css" />
 <main class="wishlist-main animate-fadeIn">
   <h1 class="wishlist-title">My Wishlist</h1>
+  <div style="text-align:right;margin-bottom:14px;">
+    <a href="/" class="btn btn-primary">Continue Shopping</a>
+    <a href="/cart" class="btn btn-primary" style="margin-left:8px;">Go to Cart</a>
+  </div>
   <% if (wishlist.length === 0) { %>
     <div class="wishlist-empty">Your wishlist is empty.</div>
+    <div style="text-align:center;margin-top:18px;">
+      <a href="/" class="btn btn-primary">Shop Now</a>
+    </div>
   <% } else { %>
     <ul class="wishlist-list">
       <% wishlist.forEach(function(item) { %>

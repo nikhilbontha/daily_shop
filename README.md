@@ -75,11 +75,9 @@ Notes:
 
 ### GUI (MongoDB Compass) - per-collection export/import
 
-1. Open MongoDB Compass and connect to your local instance (mongodb://localhost:27017).
-2. For each collection:
-   - Click the collection → `Export Collection` → select `JSON` and save.
-3. Connect Compass to your Atlas cluster (use the connection string from Atlas, URL-encode the password).
-4. In Compass, create the target database name (if needed), then `Add Data` → `Import File` and pick the JSON file.
+1. If you still have a local MongoDB copy you want to migrate, export collections from your local instance using Compass or mongodump, then import into Atlas. Prefer using the CLI tools (`mongodump` / `mongorestore`) for full-database copies; the GUI per-collection export/import is fine for small datasets.
+
+2. Connect Compass to your Atlas cluster (use the connection string from Atlas, URL-encode the password) and import the JSON files or use `mongorestore` to push the dump to Atlas.
 
 ### After migration
 
@@ -102,7 +100,49 @@ This script defaults to `dailyshop` if you press Enter at the DB name prompt.
 
 - After deployment, visit `/api/test` on your Render URL to verify everything is working.
 
+## Environment variables (required)
+
+This project requires a couple of environment variables for production deployments (Render, Heroku, etc.). Locally you can create a `.env` file in the project root with these values.
+
+- `MONGO_URI` (recommended): MongoDB connection string (Atlas or other). Example:
+
+   `mongodb+srv://<username>:<password>@cluster0.abcd.mongodb.net/dailyshop?retryWrites=true&w=majority`
+
+- `SESSION_SECRET` (recommended): A strong secret string used to sign session cookies.
+
+On Render: open your service settings → Environment → Environment Variables and add both `MONGO_URI` and `SESSION_SECRET`. The app will attempt to connect to the DB on startup and will use a persistent session store if the DB is reachable. If `MONGO_URI` is not provided the app will log a warning and run with the in-memory session store (not suitable for production).
+
+## Switching to MongoDB Atlas and removing local data
+
+If you've been running a local MongoDB and want to switch the app to use Atlas and remove the old local data, follow these steps.
+
+1. Add your Atlas connection string to `MONGO_URI` (either in `.env` locally or as an environment variable on Render).
+2. Verify the app connects to Atlas by running locally (or checking Render logs). You should see a message like `Connected to MongoDB Atlas`.
+3. Once you're confident data is on Atlas, you can remove the local `dailyshop` database.
+
+Locally (interactive):
+
+```powershell
+# From project root — this will ask you to confirm before dropping the DB
+npm run drop-local-db
+```
+
+Locally (no prompt):
+
+```powershell
+npm run drop-local-db -- -y
+```
+
+PowerShell wrapper: `.	ools
+emove-local-db.ps1 -Yes` (or use the `scripts/drop-local-db.ps1` included in this repo).
+
+Warning: This will irreversibly delete the local `dailyshop` database. Ensure you have backups or exported JSON if needed.
+
 ---
 
 **This backend is ready for production deployment on Render with MongoDB Atlas!**
 
+**git commands**
+git remote add origin https://github.com/nikhilbontha/daily_shop.git
+git branch -M main
+git push -u origin main

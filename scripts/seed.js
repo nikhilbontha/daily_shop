@@ -2,6 +2,11 @@ require('dotenv').config();
 const mongoose = require('mongoose');
 const Product = require('../models/Product'); // Adjust path if needed
 
+if (!process.env.MONGO_URI || process.env.MONGO_URI.trim() === '') {
+  console.error('MONGO_URI is not set. Please set MONGO_URI to your MongoDB Atlas connection string in .env');
+  process.exit(2);
+}
+
 const products = [
   // Books
   {

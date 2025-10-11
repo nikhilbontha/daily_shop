@@ -24,6 +24,9 @@
   <li><a href="/change-password">Change Password</a></li>
       </ul>
     </nav>
+    <div style="padding:18px 24px; display:flex; justify-content:center;">
+      <a href="/auth/logout" class="logout-btn" style="display:inline-block;background:#ff6b6b;color:#fff;padding:10px 18px;border-radius:8px;text-decoration:none;font-weight:600;box-shadow:0 2px 6px rgba(0,0,0,0.08);">Logout</a>
+    </div>
   </aside>
 
   <main class="profile-main">
@@ -34,7 +37,21 @@
     <div class="profile-info-grid">
   <div><label>Name</label><span><%= user.name %></span></div>
   <div><label>Surname</label><span><%= user.surname || '-' %></span></div>
-      <div><label>Date Of Birth</label><span><%= user.dateOfBirth ? user.dateOfBirth.toDateString() : '-' %></span></div>
+          <% 
+            // Safely render dateOfBirth whether it's a Date or an ISO/string
+            let dobDisplay = '-';
+            if (user && user.dateOfBirth) {
+              try {
+                let _d = user.dateOfBirth;
+                // If it's a plain object from Mongoose it may already be a Date
+                if (!(_d instanceof Date)) _d = new Date(_d);
+                if (!isNaN(_d)) dobDisplay = _d.toDateString();
+              } catch (e) {
+                dobDisplay = '-';
+              }
+            }
+          %>
+          <div><label>Date Of Birth</label><span><%= dobDisplay %></span></div>
       <div>
         <label>Gender</label>
         <span>

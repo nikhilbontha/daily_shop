@@ -10,7 +10,7 @@ async function main() {
   }
 
   try {
-    await mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true });
+    await mongoose.connect(uri);
     console.log('Connected to MongoDB');
     const admin = mongoose.connection.db.admin();
     const dbs = await admin.listDatabases();

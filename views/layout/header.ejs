@@ -1,11 +1,24 @@
 <header class="site-header-amazon">
   <link rel="stylesheet" href="/css/header.css" />
   <link rel="stylesheet" href="/css/modern.css" />
-  <div class="top-row" style="display:flex;align-items:center;gap:16px;">
-    <a href="/" style="display:flex;align-items:center;gap:10px;text-decoration:none;">
-  <img src="/images/logo.png" alt="Logo" style="height:100px;width:auto;vertical-align:middle;" />
-      <span class="site-name">DailyShop</span>
-    </a>
+  <div class="top-row">
+    <div class="header-left" style="display:flex;align-items:center;gap:12px;">
+      <div class="header-controls" aria-hidden="false"></div>
+      <a href="/" style="display:flex;align-items:center;gap:10px;text-decoration:none;">
+        <img src="/images/logo.png" alt="Logo" style="height:100px;width:auto;vertical-align:middle;" />
+        <span class="site-name">DailyShop</span>
+      </a>
+    </div>
+    <div class="header-controls" aria-hidden="false">
+        <button id="btn-back" class="btn-back" type="button" aria-label="Go back">
+          <span aria-hidden="true">←</span>
+          <span class="sr-only">Back</span>
+        </button>
+        <a class="btn-home" href="/" aria-label="Home">
+          <span aria-hidden="true">🏠</span>
+          <span class="sr-only">Home</span>
+        </a>
+      </div>
     <div class="location">
       Delivering to <br> <%= location || "your location" %>
     </div>
@@ -28,7 +41,7 @@
       <input type="search" name="q" placeholder="Search DailyShop" required />
       <button type="submit"><span>🔍</span></button>
     </form>
-    <div class="header-right">
+  <div class="header-right">
       <% if (user) { %>
         <a href="/profile" class="user-profile-link">
           <% if (user.avatarUrl) { %>
@@ -41,31 +54,13 @@
      
       <% } else { %>
         <div class="user-menu" id="userMenu">
-          <a href="/auth/account" class="account-label">Hello, sign in</a>
+          <a href="/auth/login" class="account-label">Hello, sign in</a>
         </div>
       <% } %>
-  <button class="btn-back" id="btn-back" type="button">&#8592; Back</button>
-  <a class="btn-back" href="/">Home</a>
     </div>
   </div>
 </header>
-    <script src="/js/animations.js"></script>
-    <script>
-      document.addEventListener('DOMContentLoaded', function() {
-        var backBtn = document.getElementById('btn-back');
-        if (backBtn) {
-          backBtn.addEventListener('click', function() {
-            if (window.history.length > 1) {
-              window.history.back();
-            } else {
-              window.location.href = '/';
-            }
-          });
-        }
-      });
-    </script>
-  <!-- Removed extra JS: now uses only inline onclick for reliability -->
-</header>
+<script src="/js/animations.js"></script>
 
 
 

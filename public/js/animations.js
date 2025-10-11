@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
-	var backBtn = document.getElementById('btn-back');
+	var backBtn = document.getElementById('btn-back') || document.getElementById('btn-back-inline');
 	if (backBtn) {
 		var goBack = function() {
 			if (window.history.length > 1) {

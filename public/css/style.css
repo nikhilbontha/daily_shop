@@ -1,4 +1,4 @@
-/* ====== New Home Page Layout ====== */
+ /* ====== New Home Page Layout ====== */ 
 .home-grid {
   display: grid;
   grid-template-columns: 220px 1fr 270px;
@@ -7,6 +7,19 @@
   margin: 0 auto 40px auto;
   min-height: 80vh;
 }
+
+/* Continue shopping button used on wishlist/cart */
+.btn-continue {
+  display: inline-block;
+  background: rgba(255,255,255,0.12);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.18);
+  padding: 10px 16px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 700;
+}
+.btn-continue:hover{ background: rgba(255,255,255,0.16); }
 .home-sidebar {
   background: #fff;
   border-radius: 16px;
@@ -1065,11 +1078,9 @@ a.back-link:hover {
 .site-header {
   background-color: #2196f3;
   padding: 15px 0;
-  color: white;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-  margin-bottom: 20px;
-}
-
+  /* Transparent site-wide theme (unified, no full-page gradient) */
+  background: transparent;
+  background-color: transparent;
 .header-container {
   display: flex;
   justify-content: space-between;
@@ -1079,6 +1090,12 @@ a.back-link:hover {
   padding: 0 20px;
 }
 
+
+/* Utility to make containers or whole pages transparent */
+.transparent-bg, .transparent-theme {
+  background: transparent !important;
+  box-shadow: none !important;
+}
 .logo h1 {
   margin: 0;
   font-size: 1.8rem;

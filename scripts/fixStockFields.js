@@ -7,7 +7,12 @@ const mongoose = require('mongoose');
 const Product = require('../models/product');
 
 async function fixStockFields() {
-  await mongoose.connect('mongodb://localhost:27017/my_proj');
+  const uri = process.env.MONGO_URI;
+  if (!uri || uri.trim() === '') {
+    console.error('MONGO_URI is not set. Please set MONGO_URI to your MongoDB Atlas connection string in .env');
+    process.exit(2);
+  }
+  await mongoose.connect(uri);
   const products = await Product.find({});
   let fixed = 0;
   for (const p of products) {

@@ -2,9 +2,15 @@
 
 <main class="cart-page container">
   <h1>Your Cart</h1>
+  <div style="text-align:right;margin-bottom:12px;">
+    <a href="/" class="btn btn-primary">Continue Shopping</a>
+  </div>
 
   <% if (!products || products.length === 0) { %>
     <div class="empty-cart">Your cart is empty.</div>
+    <div style="text-align:center;margin-top:18px;">
+      <a href="/" class="btn btn-primary">Shop Now</a>
+    </div>
   <% } else { %>
     <div class="cart-wrapper">
       <div style="text-align:right;margin-bottom:12px;">
