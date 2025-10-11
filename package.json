@@ -3,19 +3,19 @@
   "version": "1.0.0",
   "main": "app.js",
   "scripts": {
-  "start": "node app.js",
-  "test-db": "node ./scripts/test-db-conn.js",
-  "migrate-to-atlas": "powershell -NoProfile -ExecutionPolicy Bypass -File ./scripts/migrate-to-atlas.ps1",
-  "drop-local-db": "node ./scripts/drop-local-db.js"
+    "start": "node app.js",
+    "test-db": "node ./scripts/test-db-conn.js",
+    "migrate-to-atlas": "powershell -NoProfile -ExecutionPolicy Bypass -File ./scripts/migrate-to-atlas.ps1",
+    "drop-local-db": "node ./scripts/drop-local-db.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "@sendgrid/mail": "^8.1.6",
     "bcrypt": "^6.0.0",
     "connect-mongo": "^5.1.0",
-  "@sendgrid/mail": "^7.10.0",
     "cors": "^2.8.5",
     "dotenv": "^16.4.0",
     "ejs": "^3.1.10",
@@ -26,6 +26,5 @@
     "mongoose": "^8.3.0",
     "multer": "^2.0.2",
     "razorpay": "^2.9.6"
-  },
-  "devDependencies": {}
+  }
 }
