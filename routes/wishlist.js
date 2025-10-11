@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-const User = require('../models/user');
+const User = require('../models/User');
 const Product = require('../models/product');
 
 router.get('/', async (req, res) => {
@@ -24,7 +24,7 @@ router.post('/add', async (req, res) => {
   if (!productId) {
     return res.redirect('/wishlist');
   }
-  const User = require('../models/user');
+  const User = require('../models/User');
   await User.findByIdAndUpdate(
     req.session.user._id,
     { $addToSet: { wishlist: productId } }
