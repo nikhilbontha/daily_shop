@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-const Product = require('../models/product');
+const Product = require('../models/Product');
 
 router.get('/checkout', async (req, res) => {
   if (!req.session || !req.session.cart || req.session.cart.length === 0) {
