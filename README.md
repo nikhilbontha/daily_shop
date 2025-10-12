@@ -32,7 +32,7 @@ Make sure your Atlas Network Access allows connections from your IP (or add 0.0.
 
 4. **Test your backend:**
 
-   Visit [http://localhost:10000/api/test](http://localhost:10000/api/test) to check if the backend and MongoDB are connected.
+   Visit your running server's /api/test endpoint (for example, http://localhost:10000/api/test when running locally) to check if the backend and MongoDB Atlas are connected.
 
 ## Deploy to Render
 
@@ -146,3 +146,26 @@ Warning: This will irreversibly delete the local `dailyshop` database. Ensure yo
 git remote add origin https://github.com/nikhilbontha/daily_shop.git
 git branch -M main
 git push -u origin main
+
+
+**new**
+✅ 1. Check the status of your changes
+
+git status
+
+
+✅ 2. Add the changes
+
+To stage all the changed files:
+
+git add .
+
+
+✅ 3. Commit the changes
+git commit -m "Describe what you changed"
+
+
+
+✅ 4. Push the changes to the remote repository
+git push
+

@@ -66,6 +66,13 @@ app.use(errorHandler);
 // Start server function that ensures DB connection and session store setup
 async function startServer() {
   try {
+    // Require MONGO_URI for Atlas-only deployments. Abort early if missing.
+    if (!process.env.MONGO_URI || process.env.MONGO_URI.trim() === '') {
+      console.error('\u274c ERROR: MONGO_URI is not set. This application requires a MongoDB Atlas connection string in MONGO_URI.');
+      console.error('Copy .env.example to .env and set MONGO_URI, or set the environment variable in your deploy platform.');
+      process.exit(1);
+    }
+
     // Retry connectDB with exponential backoff if it fails. This helps transient
     // network/Atlas propagation issues while still enforcing Atlas-only mode.
     const maxRetries = parseInt(process.env.DB_CONNECT_RETRIES || '5', 10);

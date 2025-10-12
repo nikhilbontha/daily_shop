@@ -18,7 +18,6 @@ const connectDB = async () => {
     await mongoose.connect(mongoUri, { serverSelectionTimeoutMS: 5000 });
     lastDbError = null;
     isConnected = true;
-    const which = mongoUri.includes('localhost') ? 'local MongoDB' : 'MongoDB Atlas';
     // Try to show the host/cluster used for easier debugging
     let hostDisplay = mongoUri;
     try {
@@ -27,7 +26,7 @@ const connectDB = async () => {
     } catch (e) {
       // ignore parsing errors
     }
-    console.log(`✅ Connected to ${which} (${hostDisplay})`);
+          console.log(`✅ Connected to MongoDB Atlas (${hostDisplay})`);
     // Return the underlying MongoClient for session stores or other uses
     try {
       return mongoose.connection.getClient();

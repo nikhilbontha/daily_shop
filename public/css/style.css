@@ -1078,9 +1078,11 @@ a.back-link:hover {
 .site-header {
   background-color: #2196f3;
   padding: 15px 0;
-  /* Transparent site-wide theme (unified, no full-page gradient) */
-  background: transparent;
-  background-color: transparent;
+  color: white;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  margin-bottom: 20px;
+}
+
 .header-container {
   display: flex;
   justify-content: space-between;
@@ -1090,12 +1092,6 @@ a.back-link:hover {
   padding: 0 20px;
 }
 
-
-/* Utility to make containers or whole pages transparent */
-.transparent-bg, .transparent-theme {
-  background: transparent !important;
-  box-shadow: none !important;
-}
 .logo h1 {
   margin: 0;
   font-size: 1.8rem;
