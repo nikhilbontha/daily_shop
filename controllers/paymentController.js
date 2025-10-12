@@ -2,7 +2,7 @@ const Razorpay = require('../config/payment');
 const Order = require('../models/Order');
 const User = require('../models/User');
 
-const Product = require('../models/product');
+const Product = require('../models/Product');
 
 // Helper to normalize session cart into [{ productId, qty }]
 function normalizeSessionCart(req) {

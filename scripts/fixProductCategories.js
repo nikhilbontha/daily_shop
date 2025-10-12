@@ -1,6 +1,6 @@
 // Script to update all product categories to lowercase slugs
 const mongoose = require('mongoose');
-const Product = require('../models/product');
+const Product = require('../models/Product');
 
 const categoryMap = {
   'Medicines': 'medicines',

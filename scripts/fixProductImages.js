@@ -3,7 +3,7 @@
 // If no image is present, a default image will be set.
 
 const mongoose = require('mongoose');
-const Product = require('../models/product');
+const Product = require('../models/Product');
 
 const DEFAULT_IMAGE = 'https://i.imgur.com/1O1cR5R.jpg'; // You can change this to any default image
 

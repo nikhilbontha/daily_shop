@@ -1,6 +1,6 @@
 // Script to add default images to home_needs products
 const mongoose = require('mongoose');
-const Product = require('../models/product');
+const Product = require('../models/Product');
 
 async function addDefaultImages() {
   const uri = process.env.MONGO_URI;

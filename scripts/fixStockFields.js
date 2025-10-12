@@ -4,7 +4,7 @@
 // - Removing the old `stock` field
 
 const mongoose = require('mongoose');
-const Product = require('../models/product');
+const Product = require('../models/Product');
 
 async function fixStockFields() {
   const uri = process.env.MONGO_URI;

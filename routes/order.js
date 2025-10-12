@@ -3,7 +3,7 @@ const express = require('express');
 const router = express.Router();
 const Order = require('../models/Order');
 const User = require('../models/User');
-const Product = require('../models/product');
+const Product = require('../models/Product');
 
 // Middleware to protect route
 function isLoggedIn(req, res, next) {

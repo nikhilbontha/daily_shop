@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 const User = require('../models/User');
-const Product = require('../models/product');
+const Product = require('../models/Product');
 
 router.get('/', async (req, res) => {
   if (!req.session.user) {

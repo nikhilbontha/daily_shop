@@ -1,6 +1,6 @@
 // Script to set random stockCount values for all products
 const mongoose = require('mongoose');
-const Product = require('../models/product');
+const Product = require('../models/Product');
 
 async function setStockCounts() {
   const uri = process.env.MONGO_URI;
