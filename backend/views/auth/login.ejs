@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Login - DailyShop</title>
+  <link rel="stylesheet" href="/css/style.css" />
+  <link rel="stylesheet" href="/css/login.css" />
+</head>
+<body>
+  <%- include('../layout/header') %>
+  <div class="login-page">
+    <div class="login-bg"></div>
+    <main class="login-wrap">
+      <section class="login-card">
+        <h1 class="login-title">Login</h1>
+        <% if (typeof error !== 'undefined' && error) { %>
+          <p class="login-error"><%= error %></p>
+        <% } %>
+        <% if (typeof message !== 'undefined' && message) { %>
+          <p class="login-success" style="color:#0f5132;margin-bottom:8px;"><%= message %></p>
+        <% } %>
+        <form class="login-box" action="/auth/login" method="POST">
+          <label class="login-label">Email</label>
+          <input type="email" name="email" class="login-input" required />
+          <label class="login-label">Password</label>
+          <input type="password" name="password" class="login-input" required />
+          <div class="forgot-link"><a href="#">Forgot password?</a></div>
+          <button type="submit" class="login-btn">LOGIN</button>
+
+          <div class="or">Or Sign Up Using</div>
+          <div class="socials">
+            <a class="social fb" href="#">f</a>
+            <a class="social tw" href="#">t</a>
+            <a class="social gg" href="#">g</a>
+          </div>
+
+          <div class="signup">Or Sign Up Using <a href="/auth/register">SIGN UP</a></div>
+        </form>
+      </section>
+    </main>
+  </div>
+
+  <%- include('../layout/footer') %>
+</body>
+</html>

@@ -1,0 +1,143 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Admin Dashboard — v2</title>
+    <link rel="stylesheet" href="/admin/static/admin.css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <aside class="sidebar">
+  <div class="logo">Admin <span style="font-size:12px;color:#7c3aed;margin-left:8px;">v2</span></div>
+        <nav>
+          <a href="#/" class="active" data-key="dashboard">Dashboard</a>
+          <a href="#/users" data-key="users">Manage Users</a>
+          <a href="#/products" data-key="products">Manage Products</a>
+          <a href="#/payments" data-key="payments">Payments</a>
+          <a href="#/returns" data-key="returns">Returns</a>
+          <a href="#/home" data-key="edit-home">Edit Home</a>
+          <a href="#/orders" data-key="orders">Orders Details</a>
+          <a href="#/cancellations" data-key="cancellations">Cancellations</a>
+          <a href="#/reviews" data-key="reviews">Reviews</a>
+          <a href="#/reports" data-key="reports">Reports</a>
+          <a href="#/settings" data-key="settings">Settings</a>
+          <a href="#/logout" data-key="logout">Logout</a>
+        </nav>
+      </aside>
+      <main class="main">
+        <header class="topbar">
+          <div class="title" id="page-title">Dashboard</div>
+          <div class="search"><input id="global-search" placeholder="Search..."/></div>
+          <div class="profile-dropdown">
+            <div class="profile"> <span class="email">admin@example.com</span> <img src="/admin/static/avatar.png" id="admin-avatar"/></div>
+            <div class="dropdown-menu" id="profile-menu" aria-hidden="true">
+              <div class="profile-menu-row">
+                <img id="profile-avatar" src="/admin/static/avatar.png" alt="avatar" class="profile-avatar-sm"/>
+                <div>
+                  <div class="email" id="profile-email">admin@example.com</div>
+                  <div class="profile-role">Administrator</div>
+                </div>
+              </div>
+              <label class="profile-upload-label"><input id="avatar-input" type="file" accept="image/*"/> Upload avatar</label>
+              <a href="#" id="profile-manage">Manage profile</a>
+              <a href="#" id="profile-logout">Logout</a>
+            </div>
+          </div>
+        </header>
+        <section class="content" id="content-area">
+          <!-- dynamic content injected here -->
+        </section>
+        <!-- Product Add/Edit Modal -->
+        <div id="product-modal" class="modal" aria-hidden="true">
+          <form id="product-form" class="modal-panel">
+            <h3 id="product-form-title">Add Product</h3>
+            <label>Product Name<input name="name" required/></label>
+            <label>Price (₹)<input name="price" type="number" step="0.01" required/></label>
+            <label>Stock Count<input name="stockCount" type="number"/></label>
+            <label>Category
+              <select name="category" id="product-category-select">
+                <option value="">-- Select category --</option>
+                <option value="medicines">Medicines</option>
+                <option value="home">Home Needs</option>
+                <option value="electronics">Electronics</option>
+                <option value="clothes">Clothes</option>
+                <option value="stationery">Stationery</option>
+                <option value="groceries">Groceries</option>
+                <option value="other">Other</option>
+              </select>
+            </label>
+            <label>Description<textarea name="description"></textarea></label>
+            <label>Images<input id="product-images-input" name="images" type="file" multiple accept="image/*"/></label>
+            <div id="new-images-preview" class="existing-images"></div>
+            <div id="existing-images" class="existing-images"></div>
+            <!-- template for image preview -->
+            <template id="img-tpl"><div class="img-preview"><img src=""/><button class="remove-img">Remove</button></div></template>
+            <div class="modal-actions"><button type="submit" class="btn">Save</button> <button type="button" id="product-cancel" class="btn secondary">Cancel</button></div>
+          </form>
+        </div>
+
+        <!-- Order detail side panel -->
+        <aside id="order-panel" class="order-panel" aria-hidden="true">
+          <div class="order-header">
+            <div id="order-id">Order</div>
+            <div class="order-header-actions">
+              <button id="order-back" class="btn secondary">← Back</button>
+              <button id="order-close">✕</button>
+            </div>
+          </div>
+          <div id="order-body">Loading...</div>
+          <div class="order-actions"><button id="track-btn" class="btn">Track</button> <button id="refund-btn" class="btn secondary">Refund</button>
+            <button id="update-order-btn" class="btn" style="margin-left:8px;">Update</button>
+            <button id="delete-order-btn" class="btn danger" style="margin-left:8px;">Delete</button>
+          </div>
+        </aside>
+        <!-- Payment detail modal -->
+        <!-- Payment detail side panel -->
+        <aside id="payment-panel" class="order-panel payment-panel" aria-hidden="true">
+          <div class="order-header">
+            <div id="payment-id">Payment</div>
+            <button id="payment-close">✕</button>
+          </div>
+          <div id="payment-body">Loading...</div>
+          <div class="order-actions" style="display:flex;gap:8px;align-items:center">
+            <div style="flex:1">
+              <label>Partial refund amount (₹) <input id="refund-amount" type="number" style="width:140px;margin-left:8px;padding:6px;border-radius:6px;border:1px solid #e6eef6"/></label>
+            </div>
+            <div>
+              <button id="payment-refund" class="btn secondary">Refund</button>
+            </div>
+          </div>
+        </aside>
+        <!-- Login modal -->
+        <div id="login-modal" class="modal" aria-hidden="true">
+          <form id="login-form" class="modal-panel">
+            <h3>Admin Login</h3>
+            <label>Email<input name="email" type="email" required/></label>
+            <label>Password<input name="password" type="password" required/></label>
+            <div class="modal-actions"><button type="submit" class="btn">Login</button></div>
+          </form>
+        </div>
+        <!-- Manage Profile modal -->
+        <div id="profile-modal" class="modal" aria-hidden="true">
+          <form id="profile-form" class="modal-panel">
+            <h3>Manage Profile</h3>
+            <label>Email<input name="email" id="profile-form-email" type="email" required/></label>
+            <label>New Password<input name="password" id="profile-form-password" type="password"/></label>
+            <div class="modal-actions"><button type="submit" class="btn">Save</button> <button type="button" id="profile-cancel" class="btn secondary">Cancel</button></div>
+          </form>
+        </div>
+        <!-- Restore from Trash Modal -->
+        <div id="restore-modal" class="modal" aria-hidden="true">
+          <div class="modal-panel">
+            <h3>Restore from Trash</h3>
+            <div id="restore-list"></div>
+            <div class="restore-controls"><button id="restore-selected" class="btn">Restore Selected</button><button id="close-restore" class="btn secondary">Close</button><div class="ml-auto"><button id="restore-prev" class="btn secondary">Prev</button><span id="restore-page" class="restore-page">1</span><button id="restore-next" class="btn">Next</button></div></div>
+          </div>
+        </div>
+      </main>
+    </div>
+    <script src="/admin/static/app.js?v=2"></script>
+  </body>
+  </html>

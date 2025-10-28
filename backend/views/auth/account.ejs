@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Account - DailyShop</title>
+  <link rel="stylesheet" href="/css/style.css" />
+  <link rel="stylesheet" href="/css/account.css" />
+</head>
+<body>
+  <%- include('../layout/header') %>
+
+  <main class="container flex items-center justify-center min-h-[70vh]">
+    <div class="account-card card-animate">
+      <h1 class="account-title">Account</h1>
+      <% if (!user) { %>
+        <p class="account-desc">Please choose:</p>
+        <div class="account-actions">
+          <a class="btn-gradient" href="/auth/login">Login</a>
+          <a class="btn-gradient outline" href="/auth/register">Register</a>
+        </div>
+      <% } else { %>
+        <p class="account-desc">Welcome, <%= user.username %></p>
+        <div class="account-actions">
+          <a class="btn-gradient" href="/profile">Profile</a>
+          <a class="btn-gradient outline" href="/auth/logout">Logout</a>
+        </div>
+      <% } %>
+    </div>
+  </main>
+
+  <%- include('../layout/footer') %>
+</body>
+</html>

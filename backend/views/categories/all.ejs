@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>All Categories - DailyShop</title>
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+  <% /* Include header partial here */ %>
+  
+
+  <main>
+    <h1>All Categories</h1>
+    <section class="categories container">
+      <% categories.forEach(category => { %>
+        <a href="/category/<%= category.slug %>" class="category-card">
+          <img src="<%= category.image %>" alt="<%= category.name %>" class="category-image" />
+          <div class="category-name"><%= category.name %></div>
+        </a>
+      <% }); %>
+    </section>
+  </main>
+</body>
+<%- include('../layout/header') %>
+<link rel="stylesheet" href="/css/modern.css" />
+
+<main class="category-container">
+  <h1>All Categories</h1>
+  <section class="categories container">
+    <% categories.forEach(category => { %>
+      <a href="/category/<%= category.slug %>" class="category-card">
+        <img src="<%= category.image %>" alt="<%= category.name %>" class="category-image" />
+        <div class="category-name"><%= category.name %></div>
+      </a>
+    <% }); %>
+  </section>
+</main>
+
+<%- include('../layout/footer') %>

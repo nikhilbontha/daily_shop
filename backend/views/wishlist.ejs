@@ -1,0 +1,40 @@
+<%- include('layout/header') %>
+  <link rel="stylesheet" href="/css/wishlist.css" />
+<main class="wishlist-main animate-fadeIn">
+  <h1 class="wishlist-title">My Wishlist</h1>
+  <div style="text-align:right;margin-bottom:14px;">
+    <a href="/" class="btn btn-primary">Continue Shopping</a>
+    <a href="/cart" class="btn btn-primary" style="margin-left:8px;">Go to Cart</a>
+  </div>
+  <% if (wishlist.length === 0) { %>
+    <div class="wishlist-empty">Your wishlist is empty.</div>
+    <div style="text-align:center;margin-top:18px;">
+      <a href="/" class="btn btn-primary">Shop Now</a>
+    </div>
+  <% } else { %>
+    <ul class="wishlist-list">
+      <% wishlist.forEach(function(item) { %>
+        <li class="wishlist-card">
+          <div class="wishlist-left">
+            <img class="wishlist-thumb" src="<%= item.images && item.images.length ? item.images[0] : '/images/default.jpg' %>" alt="<%= item.name %>" />
+            <div>
+              <div class="wishlist-name"><a href="/products/<%= item._id %>"><%= item.name %></a></div>
+              <div class="wishlist-price">₹<%= item.price %></div>
+            </div>
+          </div>
+          <div class="wishlist-actions">
+            <form action="/cart/add" method="POST" style="display:inline">
+              <input type="hidden" name="productId" value="<%= item._id %>" />
+              <button class="btn-wishlist-add">Add to Cart</button>
+            </form>
+            <form action="/wishlist/remove" method="POST" style="display:inline">
+              <input type="hidden" name="productId" value="<%= item._id %>" />
+              <button class="btn-wishlist-remove">Remove</button>
+            </form>
+          </div>
+        </li>
+      <% }) %>
+    </ul>
+  <% } %>
+</main>
+<%- include('layout/footer') %>

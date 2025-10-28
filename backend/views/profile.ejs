@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Your Profile - DailyShop</title>
+  <link rel="stylesheet" href="/css/profile.css" />
+</head>
+<body>
+  <%- include('layout/header') %>
+<div class="profile-container">
+  <aside class="profile-sidebar">
+    <div class="profile-user" style="display:flex;align-items:center;gap:16px;justify-content:center;">
+      <img src="<%= user.avatarUrl || '/images/default-avatar.png' %>" class="profile-avatar" alt="Profile Avatar" style="width:70px;height:70px;border-radius:50%;object-fit:cover;" />
+  <span class="profile-username" style="font-size:1.3rem;font-weight:600;color:#222;background:#fff;padding:6px 16px;border-radius:8px;box-shadow:0 2px 8px #0001;">Hello <%= user.name %></span>
+    </div>
+    <nav>
+      <ul class="profile-nav">
+  <li class="active"><a href="/profile">My Account</a></li>
+  <li><a href="/orders">My Orders</a></li>
+  <li><a href="/returns">Returns</a></li>
+  <li><a href="/returns/cancel">Cancel</a></li>
+  <li><a href="/reviews">My Rating & Reviews</a></li>
+  <li><a href="/wishlist">My Wishlist</a></li>
+  <li><a href="/cart">Cart</a></li>
+  <li><a href="/payment">Payment</a></li>
+  <li><a href="/change-password">Change Password</a></li>
+      </ul>
+    </nav>
+    <div style="padding:18px 24px; display:flex; justify-content:center;">
+      <a href="/auth/logout" class="logout-btn" style="display:inline-block;background:#ff6b6b;color:#fff;padding:10px 18px;border-radius:8px;text-decoration:none;font-weight:600;box-shadow:0 2px 6px rgba(0,0,0,0.08);">Logout</a>
+    </div>
+  </aside>
+
+  <main class="profile-main">
+    <div class="profile-header">
+      <h2>Personal Information</h2>
+      <a class="edit-link" href="/profile/edit">✏️ Change Profile Information</a>
+    </div>
+    <div class="profile-info-grid">
+  <div><label>Name</label><span><%= user.name %></span></div>
+  <div><label>Surname</label><span><%= user.surname || '-' %></span></div>
+          <% 
+            // Safely render dateOfBirth whether it's a Date or an ISO/string
+            let dobDisplay = '-';
+            if (user && user.dateOfBirth) {
+              try {
+                let _d = user.dateOfBirth;
+                // If it's a plain object from Mongoose it may already be a Date
+                if (!(_d instanceof Date)) _d = new Date(_d);
+                if (!isNaN(_d)) dobDisplay = _d.toDateString();
+              } catch (e) {
+                dobDisplay = '-';
+              }
+            }
+          %>
+          <div><label>Date Of Birth</label><span><%= dobDisplay %></span></div>
+      <div>
+        <label>Gender</label>
+        <span>
+          <% if (user.gender === 'Male') { %>
+            <span class="gender-glyph male">♂</span> Male
+          <% } else if (user.gender === 'Female') { %>
+            <span class="gender-glyph female">♀</span> Female
+          <% } else if (user.gender === 'Other') { %>
+            Other
+          <% } else { %> - <% } %>
+        </span>
+      </div>
+      <div>
+        <label>Phone Number</label>
+        <span>
+          <% if (user.countryCode) { %>
+            <span class="flag"><img src="/images/flags/<%= user.countryCode %>.png" alt="Flag" /></span>
+          <% } %>
+          <%= user.phone || '-' %>
+        </span>
+      </div>
+      <div><label>Email</label><span><%= user.email %></span></div>
+  <div><label>Pincode</label><span><%= user.address && user.address.pincode ? user.address.pincode : '-' %></span></div>
+  <div><label>Location</label><span><%= user.address ? user.address.city + ', ' + user.address.state + ', ' + user.address.country : '-' %></span></div>
+    </div>
+  </main>
+</div>
+
+
+  <%- include('layout/footer') %>
+</body>
+</html>

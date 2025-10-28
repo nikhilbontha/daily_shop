@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>DailyShop - Home</title>
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+   <!-- Include header partial if exists -->
+  <%- include('layout/header') %>
+  <main class="home-grid">
+    <!-- Sidebar -->
+    <aside class="home-sidebar">
+      <nav>
+        <ul class="sidebar-categories">
+          <% const categories = [
+            { name: 'Medicines', slug: 'medicines', icon: '💊' },
+            { name: 'Home Needs', slug: 'home-needs', icon: '🏠' },
+            { name: 'Kitchen Items', slug: 'kitchen', icon: '🍳' },
+            { name: 'Clothes', slug: 'clothes', icon: '👕' },
+            { name: 'Books', slug: 'books', icon: '📚' },
+            { name: 'Stationery', slug: 'stationery', icon: '✏️' },
+            { name: 'Electronics', slug: 'electronics', icon: '🔌' }
+          ]; %>
+          <% categories.forEach(category => { %>
+            <li><a href="/category/<%= category.slug %>"><span class="sidebar-icon"><%= category.icon %></span> <%= category.name %></a></li>
+          <% }); %>
+        </ul>
+      </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <section class="home-main-content">
+      <div class="home-banner animate-fadeInUp">
+        <div class="banner-offer">
+          <h2>Biggest Offer Revealed</h2>
+          <p class="banner-offer-main">MORE DEALS INSIDE<br>UP TO 50% OFF</p>
+          <a href="/wishlist" class="banner-link">Wishlist Now &raquo;</a>
+        </div>
+        <img src="/images/home-needs.jpg" alt="Offer" class="banner-img" />
+      </div>
+      <div class="home-featured-row">
+        <div class="featured-card animate-fadeInUp">
+          <span>Up to 30% Off</span>
+          <p>For all hand purses</p>
+        </div>
+        <div class="featured-card animate-fadeInUp">
+          <span>Explore</span>
+          <p>The biggest discount</p>
+        </div>
+        <div class="featured-card animate-fadeInUp">
+          <span>Don't Miss</span>
+          <p>The year end sell</p>
+        </div>
+      </div>
+      <div class="home-deals">
+        <div class="deals-header">
+          <h3>Deals of the Day</h3>
+          <span class="deals-timer" id="deals-timer">20:45:12 Left</span>
+          <a href="/products" class="deals-viewall">View All Deals</a>
+        </div>
+        <div class="deals-list">
+          <% if (products && products.length) { products.slice(0,6).forEach(function(product) { %>
+            <div class="deal-card animate-fadeInUp">
+              <img src="<%= product.images && product.images.length ? product.images[0] : '/images/logo.png' %>" alt="<%= product.name %>" class="deal-img" />
+              <div class="deal-info">
+                <div class="deal-name"><%= product.name %></div>
+                <div class="deal-price">₹<%= product.price %></div>
+              </div>
+            </div>
+          <% }) } %>
+        </div>
+      </div>
+    </section>
+
+    <!-- Right Sidebar -->
+    <aside class="home-rightbar">
+      <div class="rightbar-section">
+        <h4>Recently Viewed</h4>
+        <% if (recentlyViewed && recentlyViewed.length) { %>
+          <% recentlyViewed.slice(0,1).forEach(function(item) { %>
+            <img src="<%= item.images && item.images.length ? item.images[0] : '/images/logo.png' %>" alt="<%= item.name %>" class="rightbar-img" />
+            <div class="rightbar-caption">See your browsing history</div>
+          <% }) %>
+        <% } else { %>
+          <div class="rightbar-caption">No recent items</div>
+        <% } %>
+      </div>
+      <div class="rightbar-section">
+        <h4>Suggestions for You</h4>
+        <% if (suggestions && suggestions.length) { %>
+          <% suggestions.slice(0,1).forEach(function(item) { %>
+            <img src="<%= item.images && item.images.length ? item.images[0] : '/images/logo.png' %>" alt="<%= item.name %>" class="rightbar-img" />
+            <div class="rightbar-caption">Watch more</div>
+          <% }) %>
+        <% } else { %>
+          <div class="rightbar-caption">No suggestions</div>
+        <% } %>
+      </div>
+    </aside>
+  </main>
+<!-- Other HTML content -->
+
+<!-- Your page content ends here -->
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const userMenu = document.getElementById('userMenu');
+    const toggle = document.getElementById('accountToggle');
+
+    toggle.addEventListener('click', e => {
+      e.preventDefault();
+      userMenu.classList.toggle('open');
+    });
+
+    // Close dropdown when clicking outside
+    document.addEventListener('click', e => {
+      if (!userMenu.contains(e.target)) {
+        userMenu.classList.remove('open');
+      }
+    });
+  });
+</script>
+
+  <footer class="footer">
+    <p>&copy; 2025 DailyShop. All rights reserved to BONTHA NIKHIL.</p>
+  </footer>
+</body>
+</html>
+>

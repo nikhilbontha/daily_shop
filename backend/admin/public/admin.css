@@ -1,0 +1,231 @@
+:root{--bg:#f6f7fb;--card:#fff;--muted:#6b7280;--accent:#0ea5a4}
+*{box-sizing:border-box}
+body,html,#app{height:100%;margin:0;font-family:Inter,system-ui,Segoe UI,Roboto,'Helvetica Neue',Arial}
+.sidebar{width:220px;background:#0f172a;color:#fff;position:fixed;left:0;top:0;bottom:0;padding:24px 12px;box-shadow:2px 0 12px rgba(2,6,23,.6)}
+.sidebar .logo{font-weight:700;font-size:20px;margin-bottom:18px}
+.sidebar nav a{display:block;color:#cbd5e1;padding:10px 14px;margin:6px;border-radius:8px;text-decoration:none}
+.sidebar nav a.active,.sidebar nav a:hover{background:#082135;color:var(--accent)}
+.main{margin-left:220px;padding:20px;background:var(--bg);min-height:100vh}
+.topbar{height:120px;background:linear-gradient(180deg,#fff,#fbfdff);display:flex;align-items:center;gap:16px;padding:16px 28px;border-radius:8px;box-shadow:0 2px 8px rgba(15,23,42,.06);position:sticky;top:12px;z-index:20}
+.topbar .title{font-weight:700;font-size:20px}
+.topbar .search{flex:1;max-width:none}
+.topbar .search input{width:100%;padding:10px 14px;border-radius:12px;border:1px solid #e6eef6;height:48px}
+.topbar .profile{display:flex;align-items:center;gap:16px}
+.topbar img{width:88px;height:88px;border-radius:999px}
+.content{margin-top:18px}
+.profile .email{font-size:13px;color:var(--muted);margin-right:6px}
+
+/* Image previews in product form */
+.existing-images{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+.img-preview{position:relative;width:88px;height:88px;border-radius:8px;overflow:hidden;border:1px solid #eef2f7}
+.img-preview img{width:100%;height:100%;object-fit:cover}
+.img-preview .remove-img{position:absolute;right:6px;top:6px;background:rgba(0,0,0,0.5);color:#fff;border:none;padding:2px 6px;border-radius:6px;font-size:12px}
+
+/* cover badge */
+.img-preview .cover-badge{position:absolute;left:6px;top:6px;background:var(--accent);color:#fff;padding:2px 6px;border-radius:6px;font-size:12px}
+.img-preview.cover{box-shadow:0 0 0 3px rgba(14,165,164,0.12)}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px}
+.card{background:var(--card);padding:14px;border-radius:10px;box-shadow:0 1px 2px rgba(2,6,23,.06);display:flex;justify-content:space-between;align-items:center}
+.card .meta{color:var(--muted);font-size:13px}
+.table{background:var(--card);padding:12px;border-radius:10px;overflow:auto}
+.table table{width:100%;border-collapse:collapse}
+.table th, .table td{padding:8px;text-align:left;border-bottom:1px solid #f1f5f9}
+.grid{display:grid;grid-template-columns:1fr 320px;gap:12px}
+.btn{background:var(--accent);color:#fff;padding:8px 10px;border-radius:8px;border:none}
+
+/* Modal */
+.modal{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(2,6,23,0.45)}
+.modal[aria-hidden="false"]{display:flex}
+.modal-panel{background:var(--card);padding:18px;border-radius:10px;min-width:320px;max-width:720px}
+.modal-panel label{display:block;margin-bottom:8px}
+.modal-panel input,.modal-panel textarea{width:100%;padding:8px;border-radius:6px;border:1px solid #e6eef6}
+.modal-actions{display:flex;gap:8px;justify-content:flex-end;margin-top:10px}
+.btn.secondary{background:#64748b}
+
+/* Order side panel */
+.order-panel{position:fixed;right:20px;top:50%;bottom:auto;width:420px;max-height:80vh;overflow:auto;background:var(--card);box-shadow:-8px 0 32px rgba(2,6,23,.08);padding:16px;transform:translateY(-50%) translateX(110%);transition:transform .28s ease,opacity .2s ease;z-index:1200;border-radius:8px}
+.order-panel[aria-hidden="false"]{transform:translateY(-50%) translateX(0);opacity:1}
+.order-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.order-body{overflow:auto}
+.order-actions{position:sticky;bottom:0;padding-top:8px;background:transparent}
+
+/* Restore modal tiles */
+.restore-tile{background:#fff;border:1px solid #eef2f7;padding:6px;border-radius:8px;display:flex;flex-direction:column}
+.restore-tile img{border-radius:6px}
+.restore-tile input[type="checkbox"]{width:16px;height:16px}
+
+/* truncated reason cell in returns table */
+.return-reason{
+	max-width:320px; /* limit width so long reasons ellipsize */
+	white-space:nowrap;
+	overflow:hidden;
+	text-overflow:ellipsis;
+}
+.return-reason[title]{
+	cursor:help;
+}
+
+/* subtle card hover animation */
+.card{transition:transform .22s cubic-bezier(.2,.9,.2,1),box-shadow .22s}
+.card:hover{transform:translateY(-6px);box-shadow:0 10px 30px rgba(2,6,23,.08)}
+
+/* profile dropdown */
+.profile-dropdown{position:relative}
+.profile-dropdown .dropdown-menu{position:absolute;right:0;top:calc(100% + 8px);background:var(--card);min-width:220px;border-radius:8px;padding:8px;box-shadow:0 8px 24px rgba(2,6,23,.12);display:none}
+.profile-dropdown .dropdown-menu[aria-hidden="false"]{display:block}
+.profile-dropdown .dropdown-menu .email{font-weight:600;padding:8px 6px}
+.profile-dropdown .dropdown-menu a{display:block;padding:8px 6px;border-radius:6px;color:#0f172a;text-decoration:none}
+.profile-dropdown .dropdown-menu a:hover{background:#f1f5f9}
+
+/* --- Dashboard polish and animations --- */
+:root{--accent-2:#06b6d4;--muted-2:#94a3b8;--bg-soft:linear-gradient(180deg,#f8fafc,#f3f7fb)}
+
+/* topbar refinements */
+.topbar{background:var(--bg-soft);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);border:1px solid rgba(15,23,42,0.03);padding:14px 28px;height:120px}
+.topbar .title{font-size:20px;color:#0f172a}
+.topbar .search input{background:#fff;border:1px solid #e6eef6;padding:10px 14px;box-shadow:inset 0 1px 0 rgba(255,255,255,0.6);transition:box-shadow .18s,transform .18s;height:48px}
+.topbar .search input:focus{outline:none;box-shadow:0 8px 26px rgba(14,165,164,0.08);transform:translateY(-1px)}
+.topbar .profile img{width:88px;height:88px}
+
+/* hero / chart area */
+.table.canvas-wrap{padding:18px;display:flex;flex-direction:column;gap:12px}
+#revChart{width:100%;height:220px!important;border-radius:8px;background:linear-gradient(180deg,rgba(14,165,164,0.03),transparent)}
+
+/* nicer cards */
+.cards{grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:16px}
+.card{padding:18px;border-radius:12px;background:linear-gradient(180deg,#ffffff,#fbfeff);border:1px solid rgba(2,6,23,0.04);display:flex;flex-direction:column;align-items:flex-start;justify-content:center;min-height:78px}
+.card .meta{color:var(--muted-2);font-size:13px}
+.card .value{font-size:20px;font-weight:700;color:#0f172a;margin-top:6px}
+.card .icon{margin-left:auto;background:linear-gradient(135deg,var(--accent),var(--accent-2));padding:10px;border-radius:10px;color:#fff;box-shadow:0 6px 18px rgba(14,165,164,0.08)}
+
+/* Total Sales card tweaks */
+.card.total-sales{color:#fff}
+.card.total-sales .meta{color:rgba(255,255,255,0.9)}
+.card.total-sales .value{color:#fff;font-size:24px}
+.card.total-sales .icon{filter:drop-shadow(0 6px 20px rgba(0,0,0,0.16))}
+
+/* subtle entrance animation */
+@keyframes floatUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.cards .card{animation:floatUp .36s ease both}
+.cards .card:nth-child(1){animation-delay:.04s}.cards .card:nth-child(2){animation-delay:.08s}.cards .card:nth-child(3){animation-delay:.12s}.cards .card:nth-child(4){animation-delay:.16s}
+
+/* table improvements */
+.table{padding:18px}
+.table table th{background:transparent;color:#374151}
+.table table td{color:#111827}
+.table table tbody tr{transition:background .12s,transform .12s}
+.table table tbody tr:hover{background:linear-gradient(90deg,rgba(14,165,164,0.02),transparent);transform:translateY(-2px)}
+
+/* buttons */
+.btn{border:none;padding:10px 12px;border-radius:10px;font-weight:600;cursor:pointer}
+.btn:hover{transform:translateY(-2px);box-shadow:0 10px 24px rgba(2,6,23,0.06)}
+.btn.secondary{background:#eef2f7;color:#0f172a}
+
+/* responsive tweaks */
+@media (max-width:900px){
+	.topbar{flex-wrap:wrap;gap:8px}
+	.cards{grid-template-columns:repeat(auto-fit,minmax(140px,1fr))}
+}
+
+/* small utility */
+.muted{color:var(--muted-2)}
+
+/* Restore modal layout moved from inline styles */
+#restore-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:8px;max-height:360px;overflow:auto}
+.restore-controls{margin-top:8px;display:flex;gap:8px;align-items:center}
+.restore-page{margin:0 8px}
+
+/* Profile menu small helpers */
+.profile-menu-row{display:flex;align-items:center;gap:8px;padding:8px 6px}
+.profile-avatar-sm{width:40px;height:40px;border-radius:999px;object-fit:cover}
+.profile-role{font-size:12px;color:var(--muted-2)}
+.profile-upload-label{display:block;padding:6px}
+.ml-auto{margin-left:auto}
+
+/* --- Orders-specific polish & animations --- */
+/* make the table feel lighter and more structured for the orders page */
+.table table thead th{background:linear-gradient(180deg,#ffffff,#fbfeff);border-bottom:2px solid rgba(2,6,23,0.04);padding:12px;font-weight:700}
+.table table th:nth-child(1){width:240px}
+.table table th:nth-child(2){width:260px}
+.table table th:nth-child(5){width:420px}
+.table table td{vertical-align:top;padding:14px}
+
+/* customer cell layout */
+.customer-block{display:flex;flex-direction:column;gap:4px}
+.customer-email{font-weight:700;color:#0f172a}
+.customer-meta{font-size:12px;color:var(--muted-2)}
+
+/* payment status badges */
+.payment-badge{display:inline-block;padding:6px 10px;border-radius:999px;font-weight:700;font-size:12px;color:#fff}
+.payment-badge.pending{background:#f59e0b}
+.payment-badge.paid{background:#10b981}
+.payment-badge.failed{background:#ef4444}
+.payment-badge.cash{background:#2563eb}
+
+/* items list inside a cell */
+.items-list{display:flex;flex-direction:column;gap:6px}
+.items-list div{padding:6px 0;border-bottom:1px solid #f3f4f6}
+.items-list strong{display:block;color:#0f172a;font-weight:700}
+.items-list .meta{font-size:12px;color:var(--muted-2)}
+
+@keyframes tableRowIn {
+	from { opacity: 0; transform: translateY(8px); }
+	to { opacity: 1; transform: translateY(0); }
+}
+.table table tbody tr { opacity: 1; transform: none; }
+.table table tbody tr:nth-child(1){animation:tableRowIn .28s .02s forwards}
+.table table tbody tr:nth-child(2){animation:tableRowIn .28s .04s forwards}
+.table table tbody tr:nth-child(3){animation:tableRowIn .28s .06s forwards}
+.table table tbody tr:nth-child(4){animation:tableRowIn .28s .08s forwards}
+.table table tbody tr:nth-child(5){animation:tableRowIn .28s .10s forwards}
+.table table tbody tr:nth-child(6){animation:tableRowIn .28s .12s forwards}
+.table table tbody tr:nth-child(7){animation:tableRowIn .28s .14s forwards}
+.table table tbody tr:nth-child(8){animation:tableRowIn .28s .16s forwards}
+.table table tbody tr:nth-child(9){animation:tableRowIn .28s .18s forwards}
+.table table tbody tr:nth-child(10){animation:tableRowIn .28s .20s forwards}
+
+/* enhance hover and selection feel */
+.table table tbody tr:hover{background:linear-gradient(90deg,rgba(14,165,164,0.03),transparent);transform:translateY(-2px);box-shadow:0 6px 18px rgba(2,6,23,0.03)}
+
+/* order side panel refinements */
+ .order-panel{width:520px;padding:20px;border-left:1px solid rgba(2,6,23,0.04)}
+ .order-panel[aria-hidden="false"]{box-shadow:-24px 0 60px rgba(2,6,23,0.08)}
+.order-header #order-id{font-weight:800;font-size:16px;color:#0f172a}
+.order-body{padding-right:8px;max-height:calc(100vh - 160px);overflow:auto}
+.order-body .order-section{margin-bottom:12px}
+.order-body .order-section h4{margin:0 0 6px 0;font-size:13px;color:#0f172a}
+
+/* small responsive adjustments for smaller screens */
+@media (max-width:1100px){
+	.order-panel{width:380px}
+	.order-header{display:flex;justify-content:space-between;align-items:center}
+	.order-header-actions{display:flex;gap:8px;align-items:center}
+	.order-body{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:12px}
+	.order-actions .btn{margin-left:8px}
+	.btn.danger{background:#ef4444;color:white}
+
+	/* Responsive: when viewport is narrow, make the panel full-width and stack actions */
+	@media (max-width: 900px) {
+		/* On small screens use full-screen panel */
+		.order-panel{position:fixed;left:0;right:0;top:0;bottom:0;width:100%;max-height:none;padding:16px;transform:none;border-radius:0}
+		.order-header{flex-direction:row;gap:8px}
+		.order-header-actions{margin-left:8px}
+		.order-body{align-items:flex-start}
+		.order-actions{display:flex;flex-direction:column;gap:8px}
+		.order-actions .btn{margin-left:0}
+	}
+	.table table th:nth-child(5){width:300px}
+}
+
+/* grand total footer styling */
+.table table tfoot .table-grand td{background:linear-gradient(180deg,#fbfeff,#ffffff);border-top:2px solid rgba(2,6,23,0.04);}
+.table table tfoot .table-grand td:first-child{border-bottom-left-radius:8px}
+.table table tfoot .table-grand td:last-child{border-bottom-right-radius:8px}
+
+/* payment modal styles */
+/* payment side-panel specifics */
+.payment-panel{width:460px;padding:18px;border-left:1px solid rgba(2,6,23,0.04)}
+.payment-panel #payment-body .order-section{margin-bottom:12px}
+.payment-panel input[type="number"]{padding:8px;border-radius:6px;border:1px solid #e6eef6}
+
+

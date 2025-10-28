@@ -1,0 +1,15 @@
+<%- include('layout/header') %>
+<main style="max-width:600px;margin:40px auto;background:#fff;padding:32px 28px;border-radius:12px;box-shadow:0 2px 16px rgba(0,0,0,0.07);text-align:center;">
+  <h2>Scan to pay with UPI</h2>
+  <p>Amount: ₹<%= amount %></p>
+  <p>Transaction: <%= txnId %></p>
+  <div style="margin:20px 0;">
+    <img src="<%= qrDataUrl %>" alt="UPI QR" style="width:260px;height:260px;border:1px solid #eee;padding:8px;border-radius:8px;"/>
+  </div>
+  <p>If your UPI app doesn't open automatically, use this link: <a href="<%= upiLink %>"><%= upiLink %></a></p>
+  <p>After paying, please wait a moment and refresh your order page or contact support to confirm payment.</p>
+  <form method="POST" action="/api/payment/confirm-upi" style="margin-top:18px;">
+    <input type="hidden" name="txnId" value="<%= txnId %>" />
+    <button type="submit" style="background:#16a34a;color:#fff;padding:10px 14px;border:none;border-radius:6px;cursor:pointer;font-weight:600;">I have paid (mark as paid)</button>
+  </form>
+</main>

@@ -1,0 +1,17 @@
+<%- include('../layout/header') %>
+<div class="product-detail">
+  <img src="<%= product.images[0] %>" alt="<%= product.name %>" />
+  <div class="product-info">
+    <h1><%= product.name %></h1>
+    <p class="price">₹<%= product.price %></p>
+    <p class="stock">Stock: <%= product.stockCount %></p>
+    <p><%= product.description %></p>
+    <form action="/cart/add" method="POST">
+      <input type="hidden" name="productId" value="<%= product._id %>" />
+      <button class="add-cart" type="submit">Add to Cart</button>
+    </form>
+    <a href="javascript:history.back()" class="back-link">← Back to previous page</a>
+  </div>
+</div>
+<link rel="stylesheet" href="/css/style.css" />
+

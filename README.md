@@ -79,6 +79,12 @@ Notes:
 
 2. Connect Compass to your Atlas cluster (use the connection string from Atlas, URL-encode the password) and import the JSON files or use `mongorestore` to push the dump to Atlas.
 
+## Admin panel
+
+Note: The admin user interface and separate admin server have been removed from this repository.
+
+If you were using the previous admin server (run via `admin.js`), those files and routes are no longer present. Any references to the admin UI in code or documentation have been removed or replaced with safe placeholders. If you need to restore an admin interface in the future, consider adding a dedicated admin service or a protected admin area in the main app and update these docs accordingly.
+
 ### After migration
 
 1. Update your deployed application's environment variable `MONGO_URI` to the Atlas connection string (do NOT commit it in code).
@@ -169,3 +175,9 @@ git commit -m "Describe what you changed"
 ✅ 4. Push the changes to the remote repository
 git push
 
+
+✅ 5.
+ git pull origin main --rebase
+
+✅ 6.
+ git push origin main

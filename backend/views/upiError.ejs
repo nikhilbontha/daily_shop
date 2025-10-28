@@ -1,0 +1,11 @@
+<%- include('layout/header') %>
+<main style="max-width:720px;margin:40px auto;background:#fff;padding:32px 28px;border-radius:12px;box-shadow:0 2px 16px rgba(0,0,0,0.07);">
+  <h2>UPI configuration error</h2>
+  <p style="color:#b91c1c;font-weight:600;"><%= message %></p>
+  <p>To enable UPI payments you must set these environment variables on the server (in your local `.env` or on your hosting provider):</p>
+  <ul>
+    <li><code>UPI_PAYEE_VPA</code> — your merchant VPA (for example: <code>merchant@bank</code>)</li>
+    <li><code>UPI_PAYEE_NAME</code> — merchant display name</li>
+  </ul>
+  <p>After updating the environment, restart the server and retry the UPI payment flow.</p>
+</main>

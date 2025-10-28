@@ -1,0 +1,36 @@
+<%- include('./partials/header') %>
+  <div class="admin-header">
+    <div class="admin-title">Orders</div>
+  </div>
+  <div class="table-card">
+    <table class="orders-table">
+      <thead>
+        <tr>
+          <th></th>
+          <th>Order</th>
+          <th>Customer</th>
+          <th>Status</th>
+          <th>Total</th>
+          <th>Date</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% orders.forEach(function(o){ %>
+          <tr class="order-row" data-id="<%= o._id %>">
+            <td><input type="checkbox"/></td>
+            <td>#<%= o._id.toString().slice(-6) %></td>
+            <td><%= o.user ? o.user.name : (o.userId || 'Guest') %></td>
+            <td><span class="badge <%= (o.paymentStatus||'').toLowerCase() %>"><%= o.paymentStatus || 'Unknown' %></span></td>
+            <td>$<%= (o.totalPrice || 0).toFixed(2) %></td>
+            <td class="small muted"><%= new Date(o.createdAt).toLocaleDateString() %></td>
+          </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  </div>
+<%- include('./partials/footer') %>
+<!doctype html>
+<html><head><meta charset="utf-8"><title>Removed</title></head><body>
+<h1>Admin pages removed</h1>
+<p>This admin page has been removed from the repository.</p>
+</body></html>

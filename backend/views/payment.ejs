@@ -1,0 +1,27 @@
+<%- include('layout/header') %>
+<main class="payment-main" style="max-width:420px;margin:40px auto;background:#fff;padding:32px 28px;border-radius:12px;box-shadow:0 2px 16px rgba(0,0,0,0.07);">
+	<h1 style="font-size:2rem;font-weight:700;margin-bottom:18px;">Payment</h1>
+	<form action="/api/payment/create-order" method="POST">
+		<div style="margin-bottom:18px;">
+			<label for="paymentMethod" style="display:block;font-weight:500;margin-bottom:6px;">Select Payment Mode:</label>
+			<select id="paymentMethod" name="paymentMethod" required style="width:100%;padding:8px 10px;border-radius:6px;border:1px solid #ccc;">
+				<option value="cash">Cash on Delivery</option>
+				<option value="upi">UPI</option>
+			</select>
+		</div>
+		<div id="upiDetails" style="display:none;margin-bottom:18px;">
+			<label for="upiId" style="display:block;font-weight:500;margin-bottom:6px;">Enter UPI ID:</label>
+			<input type="text" id="upiId" name="upiId" style="width:100%;padding:8px 10px;border-radius:6px;border:1px solid #ccc;" placeholder="your-upi@bank">
+		</div>
+		<button type="submit" style="width:100%;background:#219150;color:#fff;font-weight:600;padding:10px 0;border:none;border-radius:6px;font-size:1.1rem;cursor:pointer;transition:background 0.2s;">Pay Now</button>
+	</form>
+</main>
+<script>
+	const paymentSelect = document.getElementById('paymentMethod');
+	const upiDetails = document.getElementById('upiDetails');
+	if (paymentSelect) {
+		paymentSelect.addEventListener('change', function() {
+			upiDetails.style.display = this.value === 'upi' ? 'block' : 'none';
+		});
+	}
+</script>

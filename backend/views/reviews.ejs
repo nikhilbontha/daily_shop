@@ -1,0 +1,46 @@
+<%- include('layout/header') %>
+<main class="reviews-main" style="max-width:900px;margin:0 auto;padding:32px 0;">
+  <h1 style="font-size:2.2rem;font-weight:700;margin-bottom:10px;">Our Reviews</h1>
+  <p style="color:#444;margin-bottom:24px;">Read what our customers have to say about our platform.</p>
+  <form action="/reviews" method="POST" style="background:#fff;padding:24px 20px;border-radius:10px;box-shadow:0 2px 8px rgba(0,0,0,0.07);max-width:420px;margin-bottom:32px;">
+    <h2 style="font-size:1.3rem;font-weight:600;margin-bottom:12px;">Leave Us Feedback</h2>
+    <div style="margin-bottom:14px;">
+      <label for="name" style="display:block;font-weight:500;margin-bottom:6px;">Your Name:</label>
+      <input type="text" id="name" name="name" required style="width:100%;padding:8px 10px;border-radius:6px;border:1px solid #ccc;">
+    </div>
+    <div style="margin-bottom:14px;">
+      <label for="rating" style="display:block;font-weight:500;margin-bottom:6px;">Rating:</label>
+      <select id="rating" name="rating" required style="width:100%;padding:8px 10px;border-radius:6px;border:1px solid #ccc;">
+        <option value="">Select rating</option>
+        <option value="5">5 - Excellent</option>
+        <option value="4">4 - Good</option>
+        <option value="3">3 - Average</option>
+        <option value="2">2 - Poor</option>
+        <option value="1">1 - Terrible</option>
+      </select>
+    </div>
+    <div style="margin-bottom:14px;">
+      <label for="text" style="display:block;font-weight:500;margin-bottom:6px;">Your Review:</label>
+      <textarea id="text" name="text" rows="3" required style="width:100%;padding:8px 10px;border-radius:6px;border:1px solid #ccc;"></textarea>
+    </div>
+    <button type="submit" style="width:100%;background:#219150;color:#fff;font-weight:600;padding:10px 0;border:none;border-radius:6px;font-size:1.1rem;cursor:pointer;transition:background 0.2s;">Submit Review</button>
+  </form>
+  <div class="reviews-list">
+    <% if (reviews.length === 0) { %>
+      <div style="color:#888;font-size:1.1rem;margin-top:18px;">No reviews yet. Be the first to leave feedback!</div>
+    <% } %>
+    <% reviews.forEach(function(review) { %>
+      <div style="background:#fff;border-radius:10px;box-shadow:0 2px 8px rgba(0,0,0,0.07);padding:22px 18px;margin-bottom:22px;">
+        <div style="margin-bottom:8px;">
+          <span style="color:#f5b50a;font-size:1.3rem;">
+            <% for (var i = 0; i < review.rating; i++) { %>&#9733;<% } %>
+          </span>
+          <span style="font-weight:600;margin-left:8px;"><%= review.rating %> out of 5 stars</span>
+        </div>
+        <div style="font-weight:500;"> <%= review.name %> <span style="color:#888;font-weight:400;"> - <%= new Date(review.createdAt).toLocaleDateString() %> </span></div>
+        <div style="margin:10px 0 0 0;"> <%= review.text %> </div>
+      </div>
+    <% }) %>
+  </div>
+</main>
+<%- include('layout/footer') %>

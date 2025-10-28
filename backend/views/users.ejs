@@ -1,0 +1,27 @@
+<%- include('../layout/header') %>
+<div class="container">
+  <h1>Users</h1>
+  <table>
+    <thead><tr><th>Name</th><th>Email</th><th>Actions</th></tr></thead>
+    <tbody>
+      <% users.forEach(function(u){ %>
+        <tr>
+          <td><%= u.name %></td>
+          <td><%= u.email %></td>
+          <td>
+            <form method="post" action="/admin/users/<%= u._id %>/delete" style="display:inline">
+              <button type="submit" onclick="return confirm('Delete user?')">Delete</button>
+            </form>
+          </td>
+        </tr>
+      <% }) %>
+    </tbody>
+  </table>
+  <p><a href="/admin">Back to dashboard</a></p>
+</div>
+<%- include('../layout/footer') %>
+<!doctype html>
+<html><head><meta charset="utf-8"><title>Removed</title></head><body>
+<h1>Admin pages removed</h1>
+<p>This admin page has been removed from the repository.</p>
+</body></html>
